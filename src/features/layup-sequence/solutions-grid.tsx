@@ -6,29 +6,31 @@ import { recursiveSolution, memoizedSolution, dpSolution, optimizedDPSolution } 
 
 export default function SolutionsGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-0">
       <div className="md:col-span-2 flex justify-center">
         <Card className="w-full md:w-3/4">
           <CardHeader>
-            <CardTitle>Problem Equations</CardTitle>
+            <CardTitle className="text-lg md:text-xl">Problem Equations</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="pb-2">
+            <p className="pb-2 text-sm md:text-base">
               Given the recurrence relations of the layup sequence calculate the value at <strong>n = 100000:</strong>
             </p>
-            <BlockMath math={String.raw`S(n) = 1 \text{ if } n \text{ = 1 }`} />
-            <BlockMath math={String.raw`S(n) = 2 \text{ if } n \text{ = 2 }`} />
-            <BlockMath math={String.raw`S(n) = S(n-1) + S(n-2) \text{ if } n \text{ is even}`} />
-            <BlockMath math={String.raw`S(n) = 2 \cdot S(n-1) - S(n-2) \text{ if } n \text{ is odd}`} />
+            <div className="text-sm md:text-base overflow-x-auto">
+              <BlockMath math={String.raw`S(n) = 1 \text{ if } n \text{ = 1 }`} />
+              <BlockMath math={String.raw`S(n) = 2 \text{ if } n \text{ = 2 }`} />
+              <BlockMath math={String.raw`S(n) = S(n-1) + S(n-2) \text{ if } n \text{ is even}`} />
+              <BlockMath math={String.raw`S(n) = 2 \cdot S(n-1) - S(n-2) \text{ if } n \text{ is odd}`} />
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      <div className="text-2xl mt-4 font-semibold leading-none tracking-tight pb-2 text-card-foreground text-center col-span-2">
+      <div className="text-2xl mt-4 font-semibold leading-none tracking-tight pb-2 text-card-foreground text-center col-span-1 md:col-span-2">
         Recursive Solution and Memoization
       </div>
 
-      <Card>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Recursive Solution</CardTitle>
         </CardHeader>
@@ -43,7 +45,7 @@ export default function SolutionsGrid() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Memoization Solution</CardTitle>
         </CardHeader>
@@ -57,11 +59,11 @@ export default function SolutionsGrid() {
         </CardContent>
       </Card>
 
-      <div className="text-2xl mt-4 font-semibold leading-none tracking-tight pb-2 text-card-foreground text-center col-span-2">
+      <div className="text-2xl mt-4 font-semibold leading-none tracking-tight pb-2 text-card-foreground text-center col-span-1 md:col-span-2">
         Dynamic Programming Solution and Optimization
       </div>
 
-      <Card>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Dynamic Programming Solution</CardTitle>
         </CardHeader>
@@ -75,7 +77,7 @@ export default function SolutionsGrid() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Optimized Dynamic Programming</CardTitle>
         </CardHeader>

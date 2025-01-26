@@ -28,24 +28,28 @@ export default function ChartCard({ chartData }: ChartCardProps) {
   };
 
   return (
-    <Card className="flex-1">
+    <Card className="flex-1 w-full max-w-full overflow-x-auto md:overflow-visible">
       <CardHeader>
         <CardTitle>Runtime Plot</CardTitle>
-        <CardDescription>Dynamically generated runtime plot for the layup sequence</CardDescription>
+        <CardDescription className="text-sm">
+          Dynamically generated runtime plot for the layup sequence
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="mt-2 h-[400px]">
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="n" tickFormatter={(n) => n.toString()} />
-              <YAxis scale="linear" domain={[0, "auto"]} tickFormatter={(value) => value.toFixed(6)} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Line type="monotone" dataKey="runtime" stroke="#10B981" strokeWidth={2} dot={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+      <CardContent className="p-4">
+        <div className="w-full">
+          <ChartContainer config={chartConfig} className="mt-2 h-[300px] md:h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="n" tickFormatter={(n) => n.toString()} />
+                <YAxis scale="linear" domain={[0, "auto"]} tickFormatter={(value) => value.toFixed(6)} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <ChartLegend content={<ChartLegendContent />} />
+                <Line type="monotone" dataKey="runtime" stroke="#10B981" strokeWidth={2} dot={false} />
+              </LineChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </div>
       </CardContent>
     </Card>
   );

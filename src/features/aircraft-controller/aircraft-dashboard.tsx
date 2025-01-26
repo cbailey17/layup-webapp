@@ -21,98 +21,99 @@ export default function Dashboard() {
   const [mapStyle, setMapStyle] = useState<MapboxStyleKey>("satellite");
 
   return (
-    <>
-      <div className="hidden flex-col md:flex">
-        <div className="flex-1 space-y-4 p-8 pt-6">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Layup F22 Aircraft Controller
-          </h2>
-          <Tabs defaultValue="controller" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="controller">Aircraft Controller</TabsTrigger>
-              <TabsTrigger value="design">Controller Design</TabsTrigger>
-            </TabsList>
-            <TabsContent value="controller" className="space-y-4">
-              <div className="flex flex-col space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="dark:bg-gradient-to-br from-slate-700 to-slate-900 text-slate-100">
-                    <CardHeader>
-                      <CardTitle>Airplane Canvas</CardTitle>
-                      <CardDescription>Display for aircraft trajectory</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <MapboxAirplane yaw={yaw} airspeed={airspeed} mapStyle={mapStyle} />
-                    </CardContent>
-                  </Card>
-
-                  <Card className="dark:bg-gradient-to-br from-slate-700 to-slate-900 text-slate-100">
-                    <CardHeader>
-                      <CardTitle>Airplane Controls</CardTitle>
-                      <CardDescription>
-                        Control the airplanes yaw angle and airspeed
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-card-foreground">
-                            Yaw Angle
-                          </label>
-                          <input
-                            type="range"
-                            min="0"
-                            max="360"
-                            value={yaw}
-                            onChange={(e) => setYaw(Number(e.target.value))}
-                            className="w-full"
-                          />
-                          <div className="text-card-foreground">{yaw}°</div>
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-card-foreground">
-                            Airspeed
-                          </label>
-                          <input
-                            type="range"
-                            min="0"
-                            max="1200"
-                            value={airspeed}
-                            onChange={(e) => setAirspeed(Number(e.target.value))}
-                            className="w-full"
-                          />
-                          <div className="text-card-foreground">{airspeed} knots</div>
-                        </div>
+    <div className="flex flex-col md:flex">
+      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-center md:text-left">
+          Layup F22 Aircraft Controller
+        </h2>
+        <Tabs defaultValue="controller" className="space-y-4">
+          <TabsList>
+            <TabsTrigger value="controller">Aircraft Controller</TabsTrigger>
+            <TabsTrigger value="design">Controller Design</TabsTrigger>
+          </TabsList>
+          <TabsContent value="controller" className="space-y-4">
+            <div className="flex flex-col space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card className="dark:bg-gradient-to-br from-slate-700 to-slate-900 text-slate-100">
+                  <CardHeader>
+                    <CardTitle>Airplane Canvas</CardTitle>
+                    <CardDescription>Display for aircraft trajectory</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <MapboxAirplane yaw={yaw} airspeed={airspeed} mapStyle={mapStyle} />
+                  </CardContent>
+                </Card>
+                <Card className="dark:bg-gradient-to-br from-slate-700 to-slate-900 text-slate-100">
+                  <CardHeader>
+                    <CardTitle>Airplane Controls</CardTitle>
+                    <CardDescription>
+                      Control the airplanes yaw angle and airspeed
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-card-foreground">
+                          Yaw Angle
+                        </label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="360"
+                          value={yaw}
+                          onChange={(e) => setYaw(Number(e.target.value))}
+                          className="w-full"
+                        />
+                        <div className="text-card-foreground">{yaw}°</div>
                       </div>
-                      <div className="mt-12">
-                        <div className="font-semibold leading-none tracking-tight pb-2 text-card-foreground">Mapbox Styles</div>
-                        <Callout className="mt-2" type="warning" title="Warning" message="Changing the style of the map will remove the trjectory until refresh" />
-                        <MapboxStyle value={mapStyle} onChange={(v) => setMapStyle(v as MapboxStyleKey)} />
+                      <div>
+                        <label className="block text-sm font-medium text-card-foreground">
+                          Airspeed
+                        </label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1200"
+                          value={airspeed}
+                          onChange={(e) => setAirspeed(Number(e.target.value))}
+                          className="w-full"
+                        />
+                        <div className="text-card-foreground">{airspeed} knots</div>
                       </div>
-
-                    </CardContent>
-                  </Card>
-                </div>
+                    </div>
+                    <div className="mt-8 md:mt-12">
+                      <div className="font-semibold leading-none tracking-tight pb-2 text-card-foreground">
+                        Mapbox Styles
+                      </div>
+                      <Callout
+                        className="mt-2"
+                        type="warning"
+                        title="Warning"
+                        message="Changing the style of the map will remove the trajectory until refresh"
+                      />
+                      <MapboxStyle value={mapStyle} onChange={(v) => setMapStyle(v as MapboxStyleKey)} />
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-            </TabsContent>
-
-            <TabsContent value="design" className="space-y-4">
-              <Card className="dark:bg-gradient-to-br from-slate-700 to-slate-900 text-slate-100">
-                <CardHeader>
-                  <CardTitle>Aircraft Controller Design</CardTitle>
-                  <CardDescription>Description of aircraft trajectory calculations</CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col md:flex-row justify-between gap-2 w-full">
-                  <FlightSimulationOverview />
-                  <AirspeedDistanceCard />
-                  <HeadingPositionCard />
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="design" className="space-y-4">
+            <Card className="dark:bg-gradient-to-br from-slate-700 to-slate-900 text-slate-100">
+              <CardHeader>
+                <CardTitle>Aircraft Controller Design</CardTitle>
+                <CardDescription>Description of aircraft trajectory calculations</CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col md:flex-row justify-between gap-4 w-full">
+                <FlightSimulationOverview />
+                <AirspeedDistanceCard />
+                <HeadingPositionCard />
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
-    </>
+    </div>
   );
 }
 

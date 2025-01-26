@@ -17,19 +17,19 @@ interface AlgorithmSelectorProps {
 
 export default function AlgorithmSelector({ onSelect }: AlgorithmSelectorProps) {
   const [selectedAlgorithm, setSelectedAlgorithm] =
-    useState<AlgorithmKey>("optimized")
+    useState<AlgorithmKey>("optimized");
 
   const handleSelection = (value: AlgorithmKey) => {
-    setSelectedAlgorithm(value)
-    onSelect(value)
-  }
+    setSelectedAlgorithm(value);
+    onSelect(value);
+  };
 
   return (
-    <div className="flex pb-4">
+    <div className="pb-4">
       <RadioGroup
         value={selectedAlgorithm}
         onValueChange={(v) => handleSelection(v as AlgorithmKey)}
-        className="flex space-x-8"
+        className="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 md:items-center items-start"
       >
         {algorithmOptions.map(({ label, value }) => (
           <div key={value} className="flex items-center space-x-2">
@@ -39,6 +39,6 @@ export default function AlgorithmSelector({ onSelect }: AlgorithmSelectorProps) 
         ))}
       </RadioGroup>
     </div>
-  )
+  );
 }
 

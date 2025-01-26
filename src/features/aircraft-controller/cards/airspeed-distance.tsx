@@ -6,8 +6,8 @@ export function AirspeedDistanceCard() {
   return (
     <Card className="max-w-xl bg-card text-card-foreground">
       <CardHeader>
-        <CardTitle>Airspeed and Distance Calculation</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-lg md:text-xl">Airspeed and Distance Calculation</CardTitle>
+        <CardDescription className="text-sm md:text-base">
           Converting airspeed to real-world map distances.
         </CardDescription>
       </CardHeader>
@@ -18,22 +18,29 @@ export function AirspeedDistanceCard() {
           1 nautical mile per hour (NM/hr). To convert this to <strong>nautical miles per second</strong>, we use:
         </p>
 
-        <BlockMath math={String.raw`\text{speedPerSecond} = \frac{\text{airspeed (knots)}}{3600}`} />
+        <div className="text-sm md:text-base overflow-x-auto">
+          <BlockMath math={String.raw`\text{speedPerSecond} = \frac{\text{airspeed (knots)}}{3600}`} />
+        </div>
 
         <p className="text-sm text-muted-foreground">
           Since 1 degree of latitude equals approximately <InlineMath>60</InlineMath> nautical miles,
           the corresponding movement in degrees per second is:
         </p>
 
-        <BlockMath math={String.raw`\text{latDistancePerSecond} = \frac{\text{speedPerSecond}}{60}`} />
+        <div className="text-sm md:text-base overflow-x-auto">
+          <BlockMath math={String.raw`\text{latDistancePerSecond} = \frac{\text{speedPerSecond}}{60}`} />
+        </div>
 
         <p className="text-sm text-muted-foreground">
           However, longitude lines converge as latitude increases, meaning the distance covered per
           degree of longitude shrinks. To correct for this, we divide by the cosine of the latitude in radians:
         </p>
 
-        <BlockMath
-          math={String.raw`\text{lonDistancePerSecond} = \frac{\text{latDistancePerSecond}}{\cos\left(\text{currentLat} \times \frac{\mathrm{\pi}}{180}\right)}`} />
+        <div className="text-sm md:text-base overflow-x-auto">
+          <BlockMath
+            math={String.raw`\text{lonDistancePerSecond} = \frac{\text{latDistancePerSecond}}{\cos\left(\text{currentLat} \times \frac{\mathrm{\pi}}{180}\right)}`}
+          />
+        </div>
 
         <p className="text-sm text-muted-foreground">
           This ensures accurate positional updates even when flying near the poles.
@@ -42,4 +49,3 @@ export function AirspeedDistanceCard() {
     </Card>
   )
 }
-
